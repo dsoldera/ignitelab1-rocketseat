@@ -35,11 +35,33 @@ Run the following code inside the classroom and purchases folder:
 nest generate module database
 nest generate module http
 nest generate guard authorization --no-spec
+nest generate service prisma
 ```
 
 Run the following code inside the web folder:
 
+- to install auth0 module to authenticate
 ```
 yarn add @auth0/nextjs-auth0
 openssl rand -hex 32
+```
+
+- to install graphql
+```
+npm i @nestjs/graphql @nestjs/apollo graphql apollo-server-express
+```
+
+## PRISMA
+For the Backend for each of microservices
+```
+npm i prisma -D
+npm i @prisma/client
+```
+- to create the tables
+```
+npx prisma migrate dev
+```
+- to open studio
+```
+npx prisma studio
 ```
