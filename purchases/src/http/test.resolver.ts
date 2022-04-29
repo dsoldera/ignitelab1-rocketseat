@@ -8,12 +8,9 @@ export class TestResolver {
   constructor(private prisma: PrismaService) {}
 
   // to test the conection using the /test url
-  // @Get('test')
   @Query(() => String)
-  // @UseGuards(AuthorizationGuard)
+  @UseGuards(AuthorizationGuard)
   hello() {
-    // to test the return of the database
-    //return this.prisma.customer.findMany();
     return 'Hello World';
   }
 }

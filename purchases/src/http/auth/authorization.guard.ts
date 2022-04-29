@@ -16,18 +16,13 @@ import { promisify } from 'node:util';
 export class AuthorizationGuard implements CanActivate {
   private AUTH0_AUDIENCE: string;
   private AUTH0_DOMAIN: string;
+
   constructor(private configService: ConfigService) {
     this.AUTH0_AUDIENCE = this.configService.get('AUTH0_AUDIENCE') ?? '';
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN') ?? '';
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    // authenticate used to login using http
-    // const httpContext = context.switchToHttp();
-    // const req = httpContext.getRequest();
-    // const res = httpContext.getResponse();
-
-    // authentica used to login using graphql
     const { req, res } = GqlExecutionContext.create(context).getContext();
 
     const checkJWT = promisify(
@@ -45,7 +40,8 @@ export class AuthorizationGuard implements CanActivate {
     );
 
     try {
-      await checkJWT(req, res);
+      const response = await checkJWT(req, res);
+      console.log('response', response);
 
       return true;
     } catch (err) {
