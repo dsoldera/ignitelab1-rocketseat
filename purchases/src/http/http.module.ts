@@ -7,11 +7,11 @@ import path from 'path';
 import { DatabaseModule } from '../database/database.module';
 
 import { ProductsResolver } from './graphql/resolvers/products.resolver';
-// import { CustomersResolver } from './graphql/resolvers/customers.resolver';
+import { CustomersResolver } from './graphql/resolvers/customers.resolver';
 import { PurchasesResolver } from './graphql/resolvers/purchases.resolver';
 
 import { ProductsService } from '../services/products.service';
-// import { CustomersService } from '../services/customers.service';
+import { CustomersService } from '../services/customers.service';
 import { PurchasesService } from '../services/purchases.service';
 import { TestController } from './test/test.controller';
 
@@ -26,11 +26,13 @@ import { TestController } from './test/test.controller';
   ],
   controllers: [TestController],
   providers: [
-    // Services
+    //Services
+    CustomersService,
     PurchasesService,
     ProductsService,
 
     // Resolvers
+    CustomersResolver,
     PurchasesResolver,
     ProductsResolver,
   ],

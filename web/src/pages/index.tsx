@@ -2,7 +2,6 @@ import { getSession, useUser, getAccessToken } from '@auth0/nextjs-auth0';
 import { GetServerSideProps } from "next";
 
 export default function Home() {
-  return null
   // const { user } = useUser()
 
   // return (
@@ -12,12 +11,18 @@ export default function Home() {
   //     </pre>
   //   </div>
   // )
+
+  return null
 }
 
 export const getServerSideProps: GetServerSideProps  = async ({ req, res }) => {
 
     // const token = getAccessToken(req, res);
     // console.log(token);
+
+    // return {
+    //   props: {}
+    // }
 
     const session = getSession(req, res);
 
@@ -36,8 +41,4 @@ export const getServerSideProps: GetServerSideProps  = async ({ req, res }) => {
         }
       }
     }
-
-    // return {
-    //   props: {}
-    // }
 }

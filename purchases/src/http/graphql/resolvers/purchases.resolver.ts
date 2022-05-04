@@ -20,7 +20,8 @@ import { Purchase } from '../models/purchase';
 export class PurchasesResolver {
   constructor(
     private purchasesService: PurchasesService,
-    private productsService: ProductsService, // private customersService: CustomersService,
+    private productsService: ProductsService,
+    private customersService: CustomersService,
   ) {}
 
   @Query(() => [Purchase])
@@ -40,21 +41,20 @@ export class PurchasesResolver {
     @Args('data') data: CreatePurchaseInput,
     @CurrentUser() user: AuthUser,
   ) {
-    return null;
-    // return this.purchasesService.createPurchase({
-    //   productId: data.productId,
-    //   customerId: customer.id,
-    // });
-  }
-  //   @CurrentUser() user: AuthUser,
-  // ) {
-  //   let customer = await this.customersService.getCustomerByAuthUserId(
-  //     user.sub,
+    const customer = await this.customersService.getCustomerByAuthUserId(
+      user.sub,
+    );
+    console.log('user', customer);
 
-  // if (!customer) {
-  //   customer = await this.customersService.createCustomer({
-  //     authUserId: user.sub,
-  //   });
-  // }
-  //}
+    if (!customer) {
+      await this.customersService.createCustomer({
+        authUserId: user.sub,
+      });
+      //throw new Error('Customer not found');
+    }
+    return this.purchasesService.createPurchase({
+      customerId: customer.id,
+      productId: data.productId,
+    });
+  }
 }
