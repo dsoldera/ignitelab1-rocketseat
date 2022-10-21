@@ -8,22 +8,33 @@ import { ConfigService } from '@nestjs/config';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import jwt from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
+
+/**
+ * promisify converte uma função que usa padrão async de callback para Promises
+ * é proprio do nodejs
+ */
+//
 import { promisify } from 'node:util';
 
-// promisify converte uma função que usa padrão async de callback para Promises
-
+// the Guard is a middleware and ever request will check if the user has the access to the router.
+// the @injectable is inserting the auth0 inside the new instance
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
   private AUTH0_AUDIENCE: string;
   private AUTH0_DOMAIN: string;
 
   constructor(private configService: ConfigService) {
+    // get the info from the .env file
     this.AUTH0_AUDIENCE = this.configService.get('AUTH0_AUDIENCE') ?? '';
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN') ?? '';
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const { req, res } = GqlExecutionContext.create(context).getContext();
+    const httpContext = context.switchToHttp();
+    const req = httpContext.getRequest();
+    const res = httpContext.getResponse();
+
+    //const { req, res } = GqlExecutionContext.create(context).getContext();
 
     const checkJWT = promisify(
       jwt({
