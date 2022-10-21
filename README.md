@@ -10,9 +10,22 @@
 - Next.js
 - Apollo Client (GraphQL)
 
-### Requirement
+## Inicial Project
+https://github.com/rocketseat-education/ignite-lab-01-aulas
 
-- Install
+
+### Start the projects
+run in each of the folder
+`npm i`
+
+- Web Folder
+`npm run dev` 
+
+- purchases folder
+`npm run start:dev`
+
+### Requirement
+- Installation
 
 ```
 npm i -g @nestjs/cli
