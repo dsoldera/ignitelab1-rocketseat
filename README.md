@@ -14,35 +14,52 @@
 https://github.com/rocketseat-education/ignite-lab-01-aulas
 
 
-### Start the projects
+## Start the projects
 run in each of the folder
 `npm i`
 
 - Web Folder
-`npm run dev` 
+`npm run dev`
 
 - purchases folder
 `npm run start:dev`
 
-### Requirement
-- Installation
+### Initial installation
 
-```
-npm i -g @nestjs/cli
-```
+- To install the NextJs or follow the link:
+`npm i -g @nestjs/cli`
 
-### Documentation
+- https://docs.nestjs.com/
+
+### Databse on Docker 
+To be able to use a Backend we need a Databse. So there is one already created inside the docker.compose file at the project root.
+
+- To create and run the database get inside the project folder and run
+`docker-compose up -d`
+
+The database will run on localhost:5432
+## PRISMA
+For the Backend for each of microservices, run
+
+- Install the Prisma Globally
+`npm i prisma -D`
+
+- to create the tables from the squema.prisma
+`npx prisma migrate dev`
+
+- to open studio to create data
+`npx prisma studio`
+
+## GRAPHQL
+- After installed and the server next is running on localhost:3333, to open the browser interface go to:
+`http://localhost:3333/graphql`
 
 #### Auth0
 
 - https://auth0.com/docs
 - https://manage.auth0.com/dashboard/us/ignite-lab-dani2022/
 
-#### NESTJS
-
-- https://docs.nestjs.com/
-
-Run the following code inside the classroom and purchases folder:
+### Documentation
 
 ```
 nest generate module database
@@ -51,30 +68,11 @@ nest generate guard authorization --no-spec
 nest generate service prisma
 ```
 
-Run the following code inside the web folder:
+- to install auth0 module to authenticate was used:
+`yarn add @auth0/nextjs-auth0`
 
-- to install auth0 module to authenticate
-```
-yarn add @auth0/nextjs-auth0
-openssl rand -hex 32
-```
+- to create the hex for the auth0 on windows
+`openssl rand -hex 32`
 
-- to install graphql
-```
-npm i @nestjs/graphql @nestjs/apollo graphql apollo-server-express
-```
-
-## PRISMA
-For the Backend for each of microservices
-```
-npm i prisma -D
-npm i @prisma/client
-```
-- to create the tables
-```
-npx prisma migrate dev
-```
-- to open studio
-```
-npx prisma studio
-```
+- to install graphql inside the project was used:
+`npm i @nestjs/graphql @nestjs/apollo graphql apollo-server-express`

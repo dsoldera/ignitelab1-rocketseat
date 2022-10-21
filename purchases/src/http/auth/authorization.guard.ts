@@ -30,11 +30,16 @@ export class AuthorizationGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const httpContext = context.switchToHttp();
-    const req = httpContext.getRequest();
-    const res = httpContext.getResponse();
+    /**
+     * This request method is used on HTTP
+     * But for GraphQL you should not used these
+     */
+    // const httpContext = context.switchToHttp();
+    // const req = httpContext.getRequest();
+    // const res = httpContext.getResponse();
 
-    //const { req, res } = GqlExecutionContext.create(context).getContext();
+    //Used for GraphQL authentication
+    const { req, res } = GqlExecutionContext.create(context).getContext();
 
     const checkJWT = promisify(
       jwt({

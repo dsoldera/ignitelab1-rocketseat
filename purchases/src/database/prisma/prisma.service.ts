@@ -13,7 +13,7 @@ export class PrismaService
 {
   constructor() {
     super();
-    const prisma = new PrismaClient();
+    //const prisma = new PrismaClient();
   }
   async onModuleInit() {
     await this.$connect();
