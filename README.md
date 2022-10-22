@@ -21,7 +21,7 @@ run in each of the folder
 - Web Folder
 `npm run dev`
 
-- purchases folder
+- purchases or classroom folder
 `npm run start:dev`
 
 ### Initial installation

@@ -8,7 +8,7 @@ export class TestResolver {
   constructor(private prisma: PrismaService) {}
 
   @Query(() => Int)
-  // @UseGuards(AuthorizationGuard)
+  @UseGuards(AuthorizationGuard)
   hello() {
     return '100';
   }

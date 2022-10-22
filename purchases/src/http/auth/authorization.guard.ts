@@ -20,11 +20,11 @@ import { promisify } from 'node:util';
 // the @injectable is inserting the auth0 inside the new instance
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
+  // get the info from the .env file
   private AUTH0_AUDIENCE: string;
   private AUTH0_DOMAIN: string;
 
   constructor(private configService: ConfigService) {
-    // get the info from the .env file
     this.AUTH0_AUDIENCE = this.configService.get('AUTH0_AUDIENCE') ?? '';
     this.AUTH0_DOMAIN = this.configService.get('AUTH0_DOMAIN') ?? '';
   }
