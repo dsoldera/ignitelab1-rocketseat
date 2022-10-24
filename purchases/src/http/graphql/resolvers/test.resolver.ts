@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
-import { AuthorizationGuard } from './auth/authorization.guard';
-import { PrismaService } from '../database/prisma/prisma.service';
+import { AuthorizationGuard } from '../../auth/authorization.guard';
+import { PrismaService } from '../../../database/prisma/prisma.service';
 import { Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()

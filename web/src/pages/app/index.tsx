@@ -1,4 +1,4 @@
-import { getSession, useUser  } from '@auth0/nextjs-auth0';
+import { getAccessToken, getSession, useUser  } from '@auth0/nextjs-auth0';
 import { GetServerSideProps } from 'next';
 
 
@@ -24,8 +24,8 @@ export const getServerSideProps: GetServerSideProps  = async ({ req, res }) => {
    * usado para pegar o token do usuario no auth0
    * e conseguir logar no backend
    */
-  // const token = getAccessToken(req, res);
-  // console.log(token);
+  const token = getAccessToken(req, res);
+  console.log(token);
   // return {
   //   props: {}
   // }
