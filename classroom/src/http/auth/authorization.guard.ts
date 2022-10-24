@@ -8,8 +8,16 @@ import { ConfigService } from '@nestjs/config';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import jwt from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
+
+/**
+ * promisify converte uma função que usa padrão async de callback para Promises
+ * é proprio do nodejs
+ */
+//
 import { promisify } from 'node:util';
 
+// the Guard is a middleware and ever request will check if the user has the access to the router.
+// the @injectable is inserting the auth0 inside the new instance
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
   // get the info from the .env file
@@ -22,10 +30,15 @@ export class AuthorizationGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    /**
+     * This request method is used on HTTP
+     * But for GraphQL you should not used these
+     */
     // const httpContext = context.switchToHttp();
     // const req = httpContext.getRequest();
     // const res = httpContext.getResponse();
 
+    //Used for GraphQL authentication
     const { req, res } = GqlExecutionContext.create(context).getContext();
 
     const checkJWT = promisify(
@@ -44,7 +57,6 @@ export class AuthorizationGuard implements CanActivate {
 
     try {
       await checkJWT(req, res);
-
       return true;
     } catch (err) {
       throw new UnauthorizedException(err);
